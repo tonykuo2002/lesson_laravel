@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Alaouy\Youtube\Facades\Youtube;
 use App\post;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -50,4 +51,20 @@ class HomeController extends Controller
     }
 
     //dd() to do dump and exit
+
+    public function posts()
+    {
+        $playlistItems = Youtube::getPlaylistItemsByPlaylistId('PLp8YAQVH95dxb80FZvMJXek8MkPy0c9TC');
+//        dd($playlistItems);
+
+        foreach ($playlistItems['results'] as $item) {
+            $tmp = [];
+            $tmp['channelTitle']    = $item->snippet->channelTitle;
+            $tmp['title']           = $item->snippet->title;
+            $tmp['video_id']        = $item->contentDetails->videoId;
+            $tmp['description']     = $item->snippet->channelTitle;
+            $videos[] = $tmp;
+        }
+        return $videos;
+    }
 }
