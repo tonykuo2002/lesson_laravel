@@ -18,3 +18,5 @@ use Illuminate\Http\Request;
 //});
 
 Route::get('/videos', 'HomeController@posts')->name('api.get.videos');
+
+Route::get('/datas', 'HomeController@postArticle')->name('api.get.datas');

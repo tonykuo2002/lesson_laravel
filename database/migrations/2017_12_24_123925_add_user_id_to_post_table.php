@@ -15,7 +15,7 @@ class AddUserIdToPostTable extends Migration
     {
         //
         Schema::table('posts', function (Blueprint $table) {
-            $table->integer('user_id')->after('id');
+            $table->integer('user_id')->after('id')->default(0);
         });
     }
 

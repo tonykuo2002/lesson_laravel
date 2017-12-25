@@ -65,6 +65,23 @@ class HomeController extends Controller
             $tmp['description']     = $item->snippet->channelTitle;
             $videos[] = $tmp;
         }
-        return $videos;
+//        return $videos;
+        return response()->json($videos);
+    }
+
+    public function postArticle()
+    {
+        $posts = $this->postModel->all();
+
+        $posts = $posts->map( function ($post) {
+            return [
+                'user_id'   => $post->user_id,
+                'active'    => $post->active,
+                'content'   => $post->content
+            ];
+        });
+
+//        dd($posts);
+        return response()->json($posts);
     }
 }
